@@ -1,0 +1,9 @@
+{
+  "aururl": "https://aur.archlinux.org",
+  "editpkgbuild": false,
+  "builddir": "${HOME}/.cache/yay",
+  "editor": "nvim",
+  "save": true,
+  "cleanAfter": true,
+  "removeMake": "true"
+}

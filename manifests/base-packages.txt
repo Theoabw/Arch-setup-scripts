@@ -1,0 +1,26 @@
+# pacman packages to install during bootstrap
+base-devel
+git
+zsh
+neovim
+wget
+curl
+ncdu
+htop
+btop
+ripgrep
+fd
+bat
+lsd
+tree
+tmux
+zoxide
+tealdeer
+xclip
+reflector
+ufw
+docker
+docker-compose
+kubectl
+zsh-autosuggestions
+zsh-syntax-highlighting
