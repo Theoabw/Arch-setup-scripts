@@ -12,6 +12,7 @@ Usage: $(basename "$0") [options]
 Installs oh-my-zsh and optional shell enhancements.
 
 Options:
+  --skip-chsh       Do not change the user's default shell.
   --skip-fzf        Do not install fzf or configure bindings.
   --skip-history    Do not configure shared history settings.
   --skip-theme      Do not set the theme (default: agnoster).
@@ -22,9 +23,14 @@ USAGE
 WITH_FZF=true
 WITH_HISTORY=true
 WITH_THEME=true
+WITH_CHSH=true
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --skip-chsh)
+      WITH_CHSH=false
+      shift
+      ;;
     --skip-fzf)
       WITH_FZF=false
       shift
@@ -61,6 +67,25 @@ fi
 
 if [[ "$WITH_THEME" == true ]]; then
   bash "$ROOT_DIR/modules/shell/theme.sh"
+fi
+
+if [[ "$WITH_CHSH" == true ]]; then
+  if command -v zsh >/dev/null 2>&1; then
+    CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7 2>/dev/null || echo "")"
+    TARGET_SHELL="$(command -v zsh)"
+    if [[ "$CURRENT_SHELL" == "$TARGET_SHELL" ]]; then
+      log_info "Default shell already set to zsh"
+    else
+      log_info "Changing default shell to $TARGET_SHELL (password prompt may follow)"
+      if chsh -s "$TARGET_SHELL"; then
+        log_info "Default shell updated; restart your terminal or run 'exec zsh' to switch immediately"
+      else
+        log_warn "Failed to change default shell automatically. Run 'chsh -s \"$TARGET_SHELL\"' manually if desired."
+      fi
+    fi
+  else
+    log_warn "zsh binary not found; skipping default shell change"
+  fi
 fi
 
 log_info "Shell setup complete"

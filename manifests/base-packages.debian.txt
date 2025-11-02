@@ -1,8 +1,8 @@
-# pacman packages to install during bootstrap
-base-devel
+# apt packages to install during bootstrap
+build-essential
 git
 zsh
-python
+python3
 neovim
 wget
 curl
@@ -10,18 +10,15 @@ ncdu
 htop
 btop
 ripgrep
-fd
+fd-find
 bat
 lsd
 tree
 tmux
 zoxide
-tealdeer
 xclip
-reflector
 ufw
-docker
-docker-compose
-kubectl
+docker.io
+docker-compose-plugin
 zsh-autosuggestions
 zsh-syntax-highlighting

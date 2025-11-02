@@ -37,6 +37,11 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if ! is_arch_family; then
+  log_info "Skipping yay installation; not supported on $(detect_distro_pretty_name)"
+  exit 0
+fi
+
 bash "$ROOT_DIR/modules/yay/install.sh"
 
 if [[ "$CONFIGURE" == true ]]; then

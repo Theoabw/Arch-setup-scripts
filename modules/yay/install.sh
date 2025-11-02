@@ -6,6 +6,11 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 # shellcheck source=../common/helpers.sh disable=SC1091
 source "$ROOT_DIR/modules/common/helpers.sh"
 
+if ! is_arch_family; then
+  log_error "The yay installer supports only Arch-based distributions (detected $(detect_distro_pretty_name))."
+  exit 1
+fi
+
 require_non_root
 require_command git
 require_command makepkg

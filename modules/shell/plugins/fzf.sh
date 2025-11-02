@@ -7,7 +7,7 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 source "$ROOT_DIR/modules/common/helpers.sh"
 
 log_info "Installing fzf"
-pacman_install fzf
+install_packages fzf
 
 ZSHRC_PATH="$HOME/.zshrc"
 FZF_SNIPPET='[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh'
